@@ -1,0 +1,982 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Escola Castelinho da Criança: educação infantil no Paranoá-DF desde 2011. Maternal 1 e 2, Período 1 e 2 e Reforço Escolar. Matrículas 2027 abertas.">
+<meta name="theme-color" content="#1E4FA6">
+<meta property="og:title" content="Escola Castelinho da Criança">
+<meta property="og:description" content="Educação infantil com carinho, segurança e excelência no Paranoá-DF.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Escola Castelinho da Criança</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout: escola de bairro — brasão no topo, bandeirinhas, régua de idades, relógios do dia, mural de fotos, faixa vermelha nos títulos */
+  --azul:#1E4FA6;
+  --azul-escuro:#12306B;
+  --azul-noite:#0C2250;
+  --azul-claro:#E8EFFC;
+  --amarelo:#F6D93A;
+  --amarelo-forte:#F2C200;
+  --amarelo-claro:#FFF6CC;
+  --vermelho:#E3141F;
+  --vermelho-escuro:#A70D15;
+  --branco:#FFFFFF;
+  --tinta:#14214A;
+  --tinta-suave:#4A5679;
+  --linha:#D9E2F3;
+  --zap:#1E8A4E;
+  --zap-escuro:#176E3E;
+  --sombra:rgba(18,48,107,.16);
+  --fonte-titulo:"Fredoka","Nunito",system-ui,sans-serif;
+  --fonte-texto:"Nunito",system-ui,sans-serif;
+  --raio:18px;
+  --ease:cubic-bezier(.22,.8,.3,1);
+  --mola:cubic-bezier(.34,1.56,.5,1);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  background:var(--branco);color:var(--tinta);
+  font-family:var(--fonte-texto);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--fonte-titulo);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
+a{color:inherit}
+.wrap{width:min(1160px,100% - 32px);margin-inline:auto}
+:focus-visible{outline:3px solid var(--vermelho);outline-offset:3px;border-radius:8px}
+section{scroll-margin-top:84px}
+
+/* ---------- botões ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font:800 16px var(--fonte-texto);text-decoration:none;cursor:pointer;
+  border:0;border-radius:999px;padding:14px 24px;
+  transition:transform .25s var(--mola),background .2s,box-shadow .2s,color .2s;
+}
+.btn svg{width:20px;height:20px;flex:none}
+.btn:hover{transform:translateY(-3px)}
+.btn:active{transform:scale(.96)}
+.btn-amarelo{background:var(--amarelo);color:var(--azul-escuro);box-shadow:0 5px 0 var(--amarelo-forte)}
+.btn-amarelo:hover{box-shadow:0 8px 0 var(--amarelo-forte)}
+.btn-zap{background:var(--zap);color:var(--branco);box-shadow:0 5px 0 var(--zap-escuro)}
+.btn-zap:hover{box-shadow:0 8px 0 var(--zap-escuro)}
+.btn-contorno{background:transparent;color:var(--branco);box-shadow:inset 0 0 0 2.5px var(--branco)}
+.btn-contorno:hover{background:var(--branco);color:var(--azul)}
+.btn-azul{background:var(--azul);color:var(--branco);box-shadow:0 5px 0 var(--azul-escuro)}
+.btn-azul:hover{box-shadow:0 8px 0 var(--azul-escuro)}
+
+/* ---------- faixa vermelha (rótulo de seção, igual ao brasão) ---------- */
+.faixa{
+  position:relative;display:inline-block;margin:0 22px 18px;
+  background:var(--vermelho);color:var(--branco);
+  font:700 15px var(--fonte-titulo);letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 18px;
+}
+.faixa::before,.faixa::after{
+  content:"";position:absolute;top:6px;width:24px;height:100%;background:var(--vermelho-escuro);z-index:-1;
+}
+.faixa::before{left:-18px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,40% 50%)}
+.faixa::after{right:-18px;clip-path:polygon(0 0,100% 0,60% 50%,100% 100%,0 100%)}
+.faixa-wrap{position:relative;z-index:0;display:inline-block}
+
+.titulo-secao{font-size:clamp(34px,4.6vw,54px);font-weight:700;color:var(--azul-escuro);max-width:18ch}
+.intro{font-size:18px;color:var(--tinta-suave);max-width:54ch;margin-top:14px}
+
+/* ---------- topo ---------- */
+.topo{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:var(--branco);border-bottom:4px solid var(--amarelo);
+  transition:box-shadow .3s;
+}
+.topo.rolou{box-shadow:0 6px 20px var(--sombra)}
+.topo .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--azul-escuro)}
+.marca svg{width:50px;height:55px;flex:none;transition:transform .4s var(--mola)}
+.marca:hover svg{transform:rotate(-8deg) scale(1.08)}
+.marca b{display:block;font:700 20px/1 var(--fonte-titulo)}
+.marca small{display:block;font-size:13px;color:var(--tinta-suave);font-weight:700;margin-top:3px}
+.menu{display:flex;gap:2px;list-style:none;align-items:center}
+.menu a{
+  display:block;text-decoration:none;font-weight:800;font-size:15px;color:var(--azul-escuro);
+  padding:9px 13px;border-radius:999px;transition:background .2s,color .2s;
+}
+.menu a:hover{background:var(--azul-claro)}
+.menu a.ativo{background:var(--azul);color:var(--branco)}
+.menu .menu-zap{background:var(--zap);color:var(--branco);margin-left:6px}
+.menu .menu-zap:hover{background:var(--zap-escuro)}
+.menu-btn{display:none;background:none;border:0;cursor:pointer;padding:10px;border-radius:12px}
+.menu-btn i{display:block;width:26px;height:3px;border-radius:3px;background:var(--azul-escuro);margin:5px 0;transition:transform .25s var(--ease),opacity .2s}
+.menu-aberto .menu-btn i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-aberto .menu-btn i:nth-child(2){opacity:0}
+.menu-aberto .menu-btn i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--azul);color:var(--branco);padding:64px 0 120px;overflow:hidden}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.selo{
+  display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--branco);color:var(--azul-escuro);border-radius:999px;
+  padding:7px 16px 7px 8px;font-weight:800;font-size:14px;margin-bottom:24px;
+  animation:entra .6s var(--ease) both;
+}
+.selo b{background:var(--vermelho);color:var(--branco);border-radius:999px;padding:3px 10px;font-weight:800}
+.hero h1{font-size:clamp(40px,5.8vw,74px);font-weight:700;animation:entra .7s .08s var(--ease) both}
+.hero h1 .destaque{color:var(--amarelo);position:relative;display:inline-block}
+.hero h1 .destaque svg{position:absolute;left:-2%;bottom:-.14em;width:104%;height:.3em;overflow:visible}
+.hero h1 .destaque path{fill:none;stroke:var(--vermelho);stroke-width:6;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;animation:risca .9s .7s var(--ease) forwards}
+@keyframes risca{to{stroke-dashoffset:0}}
+.hero .lead{font-size:20px;line-height:1.55;max-width:36ch;margin:24px 0 30px;color:var(--azul-claro);animation:entra .7s .16s var(--ease) both}
+.hero .acoes{display:flex;flex-wrap:wrap;gap:14px;animation:entra .7s .24s var(--ease) both}
+.hero .aviso-info{
+  margin-top:28px;display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:700;color:var(--azul-claro);max-width:44ch;
+  animation:entra .7s .32s var(--ease) both;
+}
+.hero .aviso-info svg{width:20px;height:20px;flex:none;margin-top:2px;color:var(--amarelo)}
+@keyframes entra{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.brasao-hero{position:relative;display:grid;place-items:center;min-height:380px}
+.brasao-hero .brasao{width:min(330px,72vw);height:auto;filter:drop-shadow(0 18px 24px rgba(8,24,60,.35));animation:pousa .9s .2s var(--mola) both;transition:transform .5s var(--mola)}
+.brasao-hero:hover .brasao{transform:rotate(-3deg) scale(1.03)}
+@keyframes pousa{from{opacity:0;transform:translateY(40px) scale(.85) rotate(6deg)}to{opacity:1;transform:none}}
+.estrela-solta{position:absolute;color:var(--amarelo);animation:pisca 2.6s ease-in-out 3 both}
+.estrela-solta svg{width:100%;height:100%;display:block}
+.brasao-hero:hover .estrela-solta{animation:pisca 1.2s ease-in-out 2}
+@keyframes pisca{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(.6) rotate(25deg);opacity:.55}}
+.e1{width:34px;height:34px;top:4%;left:8%;animation-delay:.4s}
+.e2{width:22px;height:22px;top:18%;right:6%;animation-delay:.9s}
+.e3{width:26px;height:26px;bottom:10%;left:2%;animation-delay:1.3s}
+.e4{width:18px;height:18px;bottom:22%;right:10%;animation-delay:.2s}
+.e5{width:14px;height:14px;top:44%;left:-2%;animation-delay:1.7s}
+
+.onda{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;display:block}
+.onda path{fill:var(--branco)}
+
+/* ---------- bandeirinhas ---------- */
+.bandeirinhas{position:relative;height:58px;margin-top:-6px;overflow:hidden}
+.bandeirinhas .fio{position:absolute;left:0;right:0;top:8px;height:2px;background:var(--azul-escuro);opacity:.35}
+.bandeirinhas .flags{position:absolute;left:0;right:0;top:9px;display:flex;justify-content:space-between;padding:0 6px}
+.flag{
+  width:30px;height:38px;transform-origin:50% 0;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  animation:balanca 3.2s ease-in-out infinite alternate;
+}
+.flag:nth-child(3n+1){background:var(--vermelho)}
+.flag:nth-child(3n+2){background:var(--amarelo)}
+.flag:nth-child(3n){background:var(--azul)}
+@keyframes balanca{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+
+/* ---------- turmas ---------- */
+.turmas{padding:56px 0 110px}
+.turmas-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:52px;margin-top:48px;align-items:start}
+.regua{position:relative;background:var(--branco);border:3px solid var(--azul-escuro);border-radius:var(--raio);padding:26px 26px 18px;box-shadow:8px 8px 0 var(--amarelo)}
+.escala{display:grid;grid-template-columns:repeat(10,1fr);margin-left:150px;border-bottom:3px solid var(--azul-escuro);padding-bottom:8px;margin-bottom:8px}
+.escala span{position:relative;font:600 13px var(--fonte-titulo);color:var(--tinta-suave)}
+.escala span::after{content:"";position:absolute;left:1px;bottom:-14px;width:3px;height:9px;border-radius:2px;background:var(--azul-escuro)}
+.escala-legenda{font-size:13px;font-weight:700;color:var(--tinta-suave);text-align:right;margin-bottom:6px}
+.linha-turma{
+  --cor:var(--azul);
+  display:grid;grid-template-columns:150px 1fr;align-items:center;
+  width:100%;background:none;border:0;text-align:left;cursor:pointer;
+  padding:12px 0;border-bottom:2px dashed var(--linha);font:inherit;color:inherit;
+  border-radius:10px;transition:background .2s;
+}
+.linha-turma:last-of-type{border-bottom:0}
+.linha-turma:hover{background:var(--azul-claro)}
+.linha-turma .nome{font:700 20px var(--fonte-titulo);color:var(--azul-escuro);padding-left:8px;transition:transform .25s var(--mola),color .2s}
+.linha-turma:hover .nome{transform:translateX(5px)}
+.trilha{display:flex;align-items:center;gap:10px;height:34px}
+.barra{
+  height:100%;border-radius:999px;background:var(--cor);opacity:.38;flex:none;
+  transform-origin:left;transition:opacity .25s,transform .35s var(--mola);
+}
+.trilha .txt{font-weight:800;font-size:14px;color:var(--tinta-suave);white-space:nowrap;transition:color .2s}
+.barra.aberta{border-radius:999px 0 0 999px;-webkit-mask-image:linear-gradient(90deg,#000 75%,transparent);mask-image:linear-gradient(90deg,#000 75%,transparent)}
+.linha-turma:hover .barra{opacity:.7}
+.linha-turma[aria-selected="true"] .barra{opacity:1;transform:scaleY(1.12)}
+.linha-turma[aria-selected="true"] .nome{color:var(--cor)}
+.t-amarelo[aria-selected="true"] .nome{color:#8F6E00}
+.linha-turma[aria-selected="true"] .txt{color:var(--tinta)}
+.regua.entrou .barra{animation:cresce .8s var(--mola) both}
+.regua.entrou .linha-turma:nth-of-type(2) .barra{animation-delay:.08s}
+.regua.entrou .linha-turma:nth-of-type(3) .barra{animation-delay:.16s}
+.regua.entrou .linha-turma:nth-of-type(4) .barra{animation-delay:.24s}
+.regua.entrou .linha-turma:nth-of-type(5) .barra{animation-delay:.32s}
+@keyframes cresce{from{transform:scaleX(0)}}
+.t-amarelo{--cor:var(--amarelo-forte)}
+.t-vermelho{--cor:var(--vermelho)}
+.t-azul{--cor:var(--azul)}
+.t-azul-escuro{--cor:var(--azul-escuro)}
+
+.detalhe{
+  position:sticky;top:104px;background:var(--branco);border-radius:var(--raio);overflow:hidden;
+  border:3px solid var(--azul-escuro);box-shadow:8px 8px 0 var(--azul);
+}
+.detalhe .cabeca{background:var(--cor,var(--azul));color:var(--branco);padding:22px 28px 18px;transition:background .3s}
+.detalhe .cabeca.claro{color:var(--azul-escuro)}
+.detalhe .idade{font-weight:800;font-size:15px;opacity:.9}
+.detalhe h3{font-size:36px;font-weight:700;margin-top:2px}
+.detalhe .corpo{padding:22px 28px 28px}
+.detalhe p{color:var(--tinta-suave)}
+.detalhe ul{list-style:none;margin-top:16px;display:grid;gap:10px}
+.detalhe li{display:grid;grid-template-columns:20px 1fr;gap:10px;align-items:start}
+.detalhe li svg{width:18px;height:18px;margin-top:4px;color:var(--amarelo-forte)}
+.detalhe .conteudo{transition:opacity .2s,transform .3s var(--ease)}
+.detalhe .conteudo.trocando{opacity:0;transform:translateY(10px)}
+
+/* ---------- horários ---------- */
+.horarios{background:var(--azul-escuro);color:var(--branco);padding:100px 0;position:relative}
+.horarios .titulo-secao{color:var(--branco)}
+.horarios .intro{color:var(--azul-claro)}
+.horarios .topo-sec{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.dias{display:inline-flex;align-items:center;gap:8px;background:var(--amarelo);color:var(--azul-escuro);font-weight:800;border-radius:999px;padding:8px 18px;font-size:15px}
+.relogios{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.relogios li{
+  display:flex;align-items:center;gap:20px;background:rgba(255,255,255,.07);
+  border:2px solid rgba(255,255,255,.14);border-radius:var(--raio);padding:22px 24px;
+  transition:transform .3s var(--mola),background .2s;
+}
+.relogios li:hover{transform:translateY(-6px) rotate(-1deg);background:rgba(255,255,255,.12)}
+.relogio{width:84px;height:84px;flex:none}
+.relogio .aro{fill:var(--branco);stroke:var(--amarelo);stroke-width:6}
+.relogio .marca-h{stroke:var(--azul-escuro);stroke-width:3;stroke-linecap:round}
+.relogio .ponteiro{stroke:var(--azul-escuro);stroke-linecap:round;transform-origin:50px 50px;transition:transform 1.4s var(--mola)}
+.relogio .ponteiro.h{stroke-width:5}
+.relogio .ponteiro.m{stroke-width:3.5;stroke:var(--vermelho)}
+.relogio .miolo{fill:var(--vermelho)}
+.relogios .hora{font:700 46px/1 var(--fonte-titulo);color:var(--amarelo)}
+.relogios .evento{font:600 21px var(--fonte-titulo);margin-top:4px}
+
+/* ---------- estrutura (fotos) ---------- */
+.estrutura{padding:110px 0}
+.mural{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 30px;margin-top:52px}
+.polaroid{
+  position:relative;background:var(--branco);padding:12px 12px 46px;border-radius:6px;
+  box-shadow:0 14px 28px var(--sombra),0 0 0 1px var(--linha);
+  transition:transform .45s var(--mola),box-shadow .3s;
+}
+.polaroid .foto{aspect-ratio:4/3;max-width:100%;border-radius:3px;background:var(--azul-claro)}
+.polaroid::before{
+  content:"";position:absolute;top:-13px;left:50%;width:88px;height:26px;margin-left:-44px;
+  background:var(--amarelo);opacity:.85;transform:rotate(-3deg);
+}
+.polaroid:nth-child(3n+2)::before{background:var(--vermelho);opacity:.7;transform:rotate(4deg)}
+.polaroid:nth-child(3n)::before{background:var(--azul);opacity:.55;transform:rotate(-6deg)}
+.polaroid:nth-child(1){transform:rotate(-2.5deg)}
+.polaroid:nth-child(2){transform:rotate(1.5deg)}
+.polaroid:nth-child(3){transform:rotate(-1deg)}
+.polaroid:nth-child(4){transform:rotate(2deg)}
+.polaroid:nth-child(5){transform:rotate(-1.5deg)}
+.polaroid:nth-child(6){transform:rotate(2.5deg)}
+.polaroid:hover{transform:rotate(0) translateY(-8px) scale(1.03);box-shadow:0 22px 36px var(--sombra),0 0 0 1px var(--linha);z-index:2}
+
+/* ---------- matrícula ---------- */
+.matricula{background:var(--amarelo-claro);padding:110px 0;position:relative}
+.matricula .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:start}
+.presencial{
+  margin-top:26px;display:flex;gap:14px;align-items:flex-start;
+  background:var(--branco);border:3px solid var(--azul-escuro);border-radius:var(--raio);padding:18px 20px;
+}
+.presencial svg{width:40px;height:40px;flex:none;color:var(--vermelho)}
+.presencial b{display:block;font:700 19px var(--fonte-titulo);color:var(--azul-escuro)}
+.presencial span{font-size:15px;color:var(--tinta-suave)}
+.passos{list-style:none;margin-top:30px;counter-reset:p;display:grid;gap:18px}
+.passos li{counter-increment:p;display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start}
+.passos li::before{
+  content:counter(p);width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;font:700 20px var(--fonte-titulo);
+  background:var(--azul);color:var(--branco);box-shadow:0 4px 0 var(--azul-escuro);
+}
+.passos b{display:block;font:700 19px var(--fonte-titulo);color:var(--azul-escuro)}
+.passos span{color:var(--tinta-suave);font-size:16px}
+.ficha{
+  background:var(--branco);border-radius:var(--raio);padding:30px;display:grid;gap:16px;
+  border:3px solid var(--azul-escuro);box-shadow:10px 10px 0 var(--azul);
+}
+.ficha h3{font-size:28px;font-weight:700;color:var(--azul-escuro)}
+.ficha .sub{font-size:15px;color:var(--tinta-suave);margin-top:-8px}
+.campo{display:grid;gap:6px;min-width:0}
+.campo label{font-weight:800;font-size:14px;color:var(--azul-escuro)}
+.campo label span{font-weight:600;color:var(--tinta-suave)}
+.campo input,.campo select,.campo textarea{
+  font:inherit;font-size:16px;color:var(--tinta);background:var(--branco);width:100%;
+  border:2.5px solid var(--linha);border-radius:12px;padding:12px 14px;
+  transition:border-color .2s,box-shadow .2s;
+}
+.campo textarea{resize:vertical;min-height:84px}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 4px var(--azul-claro)}
+.campo.erro input,.campo.erro select{border-color:var(--vermelho);animation:treme .3s}
+@keyframes treme{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.previa{
+  position:relative;background:#E7F6EC;border-radius:14px 14px 14px 4px;padding:14px 16px;
+  font-size:15px;color:var(--tinta);white-space:pre-line;min-height:64px;transition:transform .2s var(--mola);
+}
+.previa b{display:block;color:var(--zap-escuro);font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.previa.pulo{transform:scale(1.015)}
+.aviso-form{font-size:14px;font-weight:800;color:var(--vermelho);min-height:1.2em}
+
+/* ---------- contato ---------- */
+.contato{padding:110px 0 120px}
+.contato .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:start}
+.lista-contato{list-style:none;margin-top:34px;display:grid;gap:12px}
+.lista-contato li{
+  display:grid;grid-template-columns:46px 1fr;gap:14px;align-items:center;
+  background:var(--branco);border:2px solid var(--linha);border-radius:14px;padding:12px 16px;
+  transition:border-color .2s,transform .25s var(--mola);
+}
+.lista-contato li:hover{border-color:var(--azul);transform:translateX(4px)}
+.lista-contato .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:var(--azul-claro);color:var(--azul)}
+.lista-contato .ic svg{width:22px;height:22px}
+.lista-contato small{display:block;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta-suave)}
+.lista-contato a,.lista-contato strong{font-weight:800;color:var(--azul-escuro);text-decoration:none;font-size:17px;overflow-wrap:anywhere}
+.lista-contato a:hover{color:var(--azul);text-decoration:underline;text-underline-offset:3px}
+
+.como-chegar{
+  position:relative;border-radius:22px;overflow:hidden;background:var(--azul);color:var(--branco);
+  border:3px solid var(--azul-escuro);box-shadow:10px 10px 0 var(--amarelo);
+}
+.mapa-real{position:relative;aspect-ratio:4/3;max-width:100%;background:var(--azul-claro)}
+.mapa-real iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.cartao-mapa{position:relative;aspect-ratio:4/3;max-width:100%;overflow:hidden;background:var(--azul)}
+.cartao-mapa svg.ruas{position:absolute;inset:0;width:100%;height:100%}
+.ruas .quadra{fill:#2A5CB5}
+.ruas .rua{stroke:#4D7DD0;stroke-width:12;fill:none;stroke-linecap:round}
+.ruas .rua-fina{stroke:#4D7DD0;stroke-width:5;fill:none}
+.ruas .rota{fill:none;stroke:var(--amarelo);stroke-width:5;stroke-linecap:round;stroke-dasharray:10 12;animation:anda 1.2s linear infinite}
+@keyframes anda{to{stroke-dashoffset:-22}}
+.pino-escola{
+  position:absolute;left:62%;top:44%;width:92px;transform:translate(-50%,-100%);
+  filter:drop-shadow(0 10px 10px rgba(8,24,60,.4));animation:quica 1.6s var(--ease) 3;
+}
+.pino-escola svg{width:100%;height:auto;display:block}
+.pino-escola::after{
+  content:"";position:absolute;left:50%;bottom:-10px;width:40px;height:12px;margin-left:-20px;border-radius:50%;
+  background:rgba(8,24,60,.35);
+}
+@keyframes quica{0%,100%{transform:translate(-50%,-100%)}40%{transform:translate(-50%,calc(-100% - 18px))}}
+.cartao-mapa .etiqueta-local{
+  position:absolute;left:16px;top:16px;background:var(--branco);color:var(--azul-escuro);
+  border-radius:12px;padding:10px 14px;font-weight:800;font-size:14px;line-height:1.3;
+  box-shadow:0 6px 16px rgba(8,24,60,.25);
+}
+.cartao-mapa .etiqueta-local span{display:block;font-weight:600;color:var(--tinta-suave);font-size:13px}
+.acoes-mapa{display:flex;flex-wrap:wrap;gap:10px;padding:18px 20px;background:var(--azul-escuro)}
+.acoes-mapa .btn{padding:11px 18px;font-size:15px}
+.acoes-mapa .copiar{margin-left:auto}
+.copiado{color:var(--amarelo);font-weight:800;font-size:14px;align-self:center}
+
+/* ---------- rodapé ---------- */
+footer{background:var(--azul-noite);color:var(--azul-claro);position:relative;padding:70px 0 100px;font-size:15px}
+footer .onda-topo{position:absolute;left:0;right:0;top:-1px;width:100%;height:50px;transform:rotate(180deg)}
+footer .onda-topo path{fill:var(--branco)}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px;align-items:start}
+footer .marca{color:var(--branco)}
+footer .marca small{color:var(--azul-claro)}
+footer h4{font:700 16px var(--fonte-titulo);color:var(--amarelo);margin-bottom:10px;letter-spacing:.04em}
+footer p{line-height:1.7}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+.estrelas-rodape{display:flex;gap:6px;margin-top:16px;color:var(--amarelo)}
+.estrelas-rodape svg{width:16px;height:16px}
+
+/* ---------- whatsapp flutuante ---------- */
+.zap-flutuante{
+  position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;
+  display:flex;align-items:center;gap:10px;text-decoration:none;
+  background:var(--zap);color:var(--branco);border-radius:999px;padding:12px 18px 12px 14px;
+  font-weight:800;font-size:15px;box-shadow:0 10px 24px rgba(8,24,60,.3);
+  transition:transform .3s var(--mola);
+}
+.zap-flutuante:hover{transform:scale(1.06) rotate(-2deg)}
+.zap-flutuante svg{width:26px;height:26px}
+
+/* ---------- entrada ao rolar ---------- */
+.revela{transition:opacity .6s var(--ease),transform .7s var(--mola)}
+.revela.pre{opacity:0;transform:translateY(28px)}
+.revela[data-atraso="1"]{transition-delay:.08s}
+.revela[data-atraso="2"]{transition-delay:.16s}
+.revela[data-atraso="3"]{transition-delay:.24s}
+
+/* ---------- responsivo ---------- */
+@media (max-width:980px){
+  .hero .wrap,.turmas-grid,.matricula .wrap,.contato .wrap{grid-template-columns:1fr}
+  .brasao-hero{min-height:300px;order:-1}
+  .detalhe{position:static}
+  .relogios{grid-template-columns:1fr}
+  .mural{grid-template-columns:repeat(2,1fr)}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  footer .wrap > div:first-child{grid-column:1/-1}
+}
+@media (max-width:860px){
+  .menu{
+    position:fixed;inset:80px 0 auto 0;flex-direction:column;align-items:stretch;gap:4px;
+    background:var(--branco);padding:12px 16px 20px;border-bottom:4px solid var(--amarelo);
+    transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .25s,transform .3s var(--ease);
+  }
+  .menu-aberto .menu{transform:none;opacity:1;pointer-events:auto}
+  .menu a{padding:13px 16px;font-size:18px}
+  .menu .menu-zap{margin:6px 0 0;text-align:center}
+  .menu-btn{display:block}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .hero{padding:36px 0 96px}
+  .hero .lead{font-size:18px}
+  .brasao-hero{min-height:240px}
+  .brasao-hero .brasao{width:min(230px,62vw)}
+  .turmas,.estrutura,.matricula,.contato{padding-block:76px}
+  .horarios{padding:76px 0}
+  .regua{padding:18px 14px 12px;box-shadow:5px 5px 0 var(--amarelo)}
+  .escala{margin-left:0}
+  .linha-turma{grid-template-columns:1fr;gap:6px}
+  .linha-turma .nome{font-size:18px}
+  .duas{grid-template-columns:1fr}
+  .ficha{padding:22px;box-shadow:6px 6px 0 var(--azul)}
+  .detalhe .cabeca,.detalhe .corpo{padding-inline:20px}
+  .mural{grid-template-columns:1fr 1fr;gap:22px 16px}
+  .polaroid{padding:8px 8px 30px}
+  .relogios li{padding:16px}
+  .relogio{width:68px;height:68px}
+  .relogios .hora{font-size:38px}
+  footer .wrap{grid-template-columns:1fr}
+  .acoes-mapa .copiar{margin-left:0}
+  .zap-flutuante span{display:none}
+  .zap-flutuante{padding:14px}
+  .marca b{font-size:18px}
+  .marca small{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .revela.pre{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<!-- Brasão da escola (vetor), reutilizado em todo o site -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="estrela" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.8l2.9 6.6 7.2.7-5.4 4.8 1.6 7.1L12 17.3 5.7 21l1.6-7.1L1.9 9.1l7.2-.7z"/></symbol>
+    <path id="curva-baixo" d="M34 162 Q100 262 166 162"/>
+    <symbol id="brasao" viewBox="-14 0 228 226">
+      <!-- borda branca -->
+      <path fill="#FFFFFF" d="M22 4 H178 Q194 4 194 20 V122 C194 172 146 200 100 222 C54 200 6 172 6 122 V20 Q6 4 22 4Z"/>
+      <!-- faixa azul -->
+      <path fill="#1E4FA6" d="M26 13 H174 Q185 13 185 24 V122 C185 166 142 191 100 211 C58 191 15 166 15 122 V24 Q15 13 26 13Z"/>
+      <!-- campo amarelo -->
+      <path fill="#F6D93A" stroke="#FFFFFF" stroke-width="2.5" d="M30 50 H170 V118 C170 150 138 168 100 180 C62 168 30 150 30 118Z"/>
+      <!-- nome -->
+      <text x="100" y="41" text-anchor="middle" fill="#FFFFFF" font-family="Fredoka, Nunito, sans-serif" font-weight="700" font-size="25" textLength="138" lengthAdjust="spacingAndGlyphs">CASTELINHO</text>
+      <!-- estrelas -->
+      <g fill="#12306B" color="#12306B">
+        <use href="#estrela" x="49" y="56" width="16" height="16"/>
+        <use href="#estrela" x="69" y="56" width="16" height="16"/>
+        <use href="#estrela" x="92" y="56" width="16" height="16"/>
+        <use href="#estrela" x="115" y="56" width="16" height="16"/>
+        <use href="#estrela" x="135" y="56" width="16" height="16"/>
+      </g>
+      <!-- fita vermelha -->
+      <path fill="#A70D15" d="M-12 82 H12 V104 H-12 L-4 93Z"/>
+      <path fill="#A70D15" d="M212 82 H188 V104 H212 L204 93Z"/>
+      <path fill="#E3141F" d="M0 78 H200 V100 H0Z"/>
+      <!-- castelo -->
+      <g fill="#1E4FA6">
+        <path d="M100 82 V70" stroke="#12306B" stroke-width="2.4"/>
+        <path fill="#E3141F" d="M100 70 L113 74 L100 78Z"/>
+        <path d="M86 104 V96 h5 v4 h4 v-4 h10 v4 h4 v-4 h5 v8Z"/>
+        <path d="M86 104 H114 V112 H86Z"/>
+        <path d="M54 124 v-10 h6 v5 h5 v-5 h6 v5 h5 v-5 h6 v10Z"/>
+        <path d="M118 124 v-10 h6 v5 h5 v-5 h6 v5 h5 v-5 h6 v10Z"/>
+        <path d="M56 124 H144 V160 H56Z"/>
+        <path d="M88 108 H112 V160 H88Z"/>
+      </g>
+      <path fill="#F6D93A" d="M93 160 V146 a7 7 0 0 1 14 0 V160Z"/>
+      <rect fill="#F6D93A" x="95" y="116" width="10" height="11" rx="5"/>
+      <rect fill="#F6D93A" x="64" y="132" width="9" height="10" rx="1.5"/>
+      <rect fill="#F6D93A" x="127" y="132" width="9" height="10" rx="1.5"/>
+      <!-- da criança -->
+      <text fill="#FFFFFF" font-family="Fredoka, Nunito, sans-serif" font-weight="700" font-size="21" letter-spacing="1.5">
+        <textPath href="#curva-baixo" startOffset="50%" text-anchor="middle" textLength="112" lengthAdjust="spacingAndGlyphs">DA CRIANÇA</textPath>
+      </text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================= TOPO ================= -->
+<header class="topo" id="topo">
+  <div class="wrap">
+    <a href="#inicio" class="marca" aria-label="Escola Castelinho da Criança, voltar ao início">
+      <svg viewBox="-14 0 228 226" role="img" aria-hidden="true"><use href="#brasao"/></svg>
+      <span><b>Castelinho da Criança</b><small>Educação infantil · Paranoá-DF</small></span>
+    </a>
+    <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    <ul class="menu">
+      <li><a href="#turmas">Turmas</a></li>
+      <li><a href="#horarios">Horários</a></li>
+      <li><a href="#estrutura">Estrutura</a></li>
+      <li><a href="#matricula">Matrículas</a></li>
+      <li><a href="#contato">Contato</a></li>
+      <li><a class="menu-zap js-zap" href="https://wa.me/5561998526089" target="_blank" rel="noopener">WhatsApp</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<!-- ================= INÍCIO ================= -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <span class="selo"><b>2027</b>Matrículas abertas</span>
+      <h1>Educação infantil com <span style="white-space:nowrap"><span class="destaque">carinho<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 50 3, 130 4, 197 11"/></svg></span>,</span> segurança e excelência.</h1>
+      <p class="lead">Desde 2011 na Quadra 14 do Paranoá, cuidando e ensinando crianças a partir de 2 anos no Maternal, no Período e no Reforço Escolar.</p>
+      <div class="acoes">
+        <a class="btn btn-amarelo js-zap" href="https://wa.me/5561998526089" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>
+          Falar no WhatsApp
+        </a>
+        <a class="btn btn-contorno" href="#contato">Como chegar</a>
+      </div>
+      <p class="aviso-info">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.01"/></svg>
+        As matrículas são feitas presencialmente, na secretaria da escola.
+      </p>
+    </div>
+    <div class="brasao-hero">
+      <span class="estrela-solta e1" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#estrela"/></svg></span>
+      <span class="estrela-solta e2" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#estrela"/></svg></span>
+      <span class="estrela-solta e3" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#estrela"/></svg></span>
+      <span class="estrela-solta e4" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#estrela"/></svg></span>
+      <span class="estrela-solta e5" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#estrela"/></svg></span>
+      <svg class="brasao" viewBox="-14 0 228 226" role="img" aria-label="Brasão da Escola Castelinho da Criança"><use href="#brasao"/></svg>
+    </div>
+  </div>
+  <svg class="onda" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 0, 480 70, 720 38 S 1200 0, 1440 36 V70 H0Z"/></svg>
+</section>
+
+<div class="bandeirinhas" aria-hidden="true"><div class="fio"></div><div class="flags" id="flags"></div></div>
+
+<!-- ================= TURMAS ================= -->
+<section class="turmas" id="turmas">
+  <div class="wrap">
+    <span class="faixa-wrap revela"><span class="faixa">Turmas</span></span>
+    <h2 class="titulo-secao revela" data-atraso="1">Uma turma para cada fase, a partir dos 2 anos.</h2>
+    <p class="intro revela" data-atraso="2">Toque em uma turma para ver o que a criança aprende em cada etapa.</p>
+
+    <div class="turmas-grid">
+      <div class="regua revela" id="regua" role="tablist" aria-label="Turmas por idade">
+        <p class="escala-legenda">Idade da criança (anos)</p>
+        <div class="escala" aria-hidden="true">
+          <span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span>
+        </div>
+        <button class="linha-turma t-amarelo" role="tab" type="button" data-turma="m1" aria-selected="true">
+          <span class="nome">Maternal 1</span>
+          <span class="trilha"><span class="barra" style="margin-left:0;width:10%"></span><span class="txt">2 anos</span></span>
+        </button>
+        <button class="linha-turma t-vermelho" role="tab" type="button" data-turma="m2" aria-selected="false">
+          <span class="nome">Maternal 2</span>
+          <span class="trilha"><span class="barra" style="margin-left:10%;width:10%"></span><span class="txt">3 anos</span></span>
+        </button>
+        <button class="linha-turma t-azul" role="tab" type="button" data-turma="p1" aria-selected="false">
+          <span class="nome">Período 1</span>
+          <span class="trilha"><span class="barra" style="margin-left:20%;width:10%"></span><span class="txt">4 anos</span></span>
+        </button>
+        <button class="linha-turma t-amarelo" role="tab" type="button" data-turma="p2" aria-selected="false">
+          <span class="nome">Período 2</span>
+          <span class="trilha"><span class="barra" style="margin-left:30%;width:10%"></span><span class="txt">5 anos</span></span>
+        </button>
+        <button class="linha-turma t-azul-escuro" role="tab" type="button" data-turma="rf" aria-selected="false">
+          <span class="nome">Reforço</span>
+          <span class="trilha"><span class="barra aberta" style="margin-left:40%;width:45%"></span><span class="txt">6+</span></span>
+        </button>
+      </div>
+
+      <aside class="detalhe revela" data-atraso="2" aria-live="polite">
+        <div class="conteudo" id="detalhe-conteudo"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HORÁRIOS ================= -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <div class="topo-sec">
+      <div>
+        <span class="faixa-wrap revela"><span class="faixa">Horários</span></span>
+        <h2 class="titulo-secao revela" data-atraso="1">O dia na escola.</h2>
+      </div>
+      <span class="dias revela" data-atraso="2">Segunda a sexta-feira</span>
+    </div>
+    <ul class="relogios" id="relogios">
+      <li class="revela" data-hora="7">
+        <svg class="relogio" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="aro" cx="50" cy="50" r="44"/>
+          <path class="marca-h" d="M50 12v6M50 82v6M12 50h6M82 50h6"/>
+          <line class="ponteiro h" x1="50" y1="50" x2="50" y2="30"/>
+          <line class="ponteiro m" x1="50" y1="50" x2="50" y2="20"/>
+          <circle class="miolo" cx="50" cy="50" r="4.5"/>
+        </svg>
+        <div><div class="hora">7h</div><div class="evento">Chegada</div></div>
+      </li>
+      <li class="revela" data-atraso="1" data-hora="11">
+        <svg class="relogio" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="aro" cx="50" cy="50" r="44"/>
+          <path class="marca-h" d="M50 12v6M50 82v6M12 50h6M82 50h6"/>
+          <line class="ponteiro h" x1="50" y1="50" x2="50" y2="30"/>
+          <line class="ponteiro m" x1="50" y1="50" x2="50" y2="20"/>
+          <circle class="miolo" cx="50" cy="50" r="4.5"/>
+        </svg>
+        <div><div class="hora">11h</div><div class="evento">Almoço</div></div>
+      </li>
+      <li class="revela" data-atraso="2" data-hora="17">
+        <svg class="relogio" viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="aro" cx="50" cy="50" r="44"/>
+          <path class="marca-h" d="M50 12v6M50 82v6M12 50h6M82 50h6"/>
+          <line class="ponteiro h" x1="50" y1="50" x2="50" y2="30"/>
+          <line class="ponteiro m" x1="50" y1="50" x2="50" y2="20"/>
+          <circle class="miolo" cx="50" cy="50" r="4.5"/>
+        </svg>
+        <div><div class="hora">17h</div><div class="evento">Saída</div></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ESTRUTURA ================= -->
+<section class="estrutura" id="estrutura">
+  <div class="wrap">
+    <span class="faixa-wrap revela"><span class="faixa">Estrutura</span></span>
+    <h2 class="titulo-secao revela" data-atraso="1">Conheça a nossa escola.</h2>
+    <div class="mural">
+      <figure class="polaroid revela"><div class="foto"></div></figure>
+      <figure class="polaroid revela" data-atraso="1"><div class="foto"></div></figure>
+      <figure class="polaroid revela" data-atraso="2"><div class="foto"></div></figure>
+      <figure class="polaroid revela"><div class="foto"></div></figure>
+      <figure class="polaroid revela" data-atraso="1"><div class="foto"></div></figure>
+      <figure class="polaroid revela" data-atraso="2"><div class="foto"></div></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MATRÍCULA ================= -->
+<section class="matricula" id="matricula">
+  <div class="wrap">
+    <div>
+      <span class="faixa-wrap revela"><span class="faixa">Matrículas 2027</span></span>
+      <h2 class="titulo-secao revela" data-atraso="1">Quer uma vaga para o seu filho?</h2>
+      <div class="presencial revela" data-atraso="2">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true"><path d="M8 20 24 8l16 12v20H8z"/><path d="M19 40V29h10v11"/></svg>
+        <div><b>A matrícula é feita na escola</b><span>Este site é informativo. Para matricular, venha até a secretaria com os documentos da criança e do responsável.</span></div>
+      </div>
+      <ol class="passos">
+        <li class="revela"><div><b>Mande uma mensagem</b><span>Tire suas dúvidas sobre vagas, turmas e valores pelo WhatsApp.</span></div></li>
+        <li class="revela" data-atraso="1"><div><b>Venha conhecer a escola</b><span>Visite as salas e converse com a equipe.</span></div></li>
+        <li class="revela" data-atraso="2"><div><b>Faça a matrícula na secretaria</b><span>Presencialmente, na Quadra 14 do Paranoá.</span></div></li>
+      </ol>
+    </div>
+
+    <form class="ficha revela" id="ficha" novalidate>
+      <h3>Monte sua mensagem</h3>
+      <p class="sub">Preencha e envie direto para o WhatsApp da escola.</p>
+      <div class="campo"><label for="resp">Seu nome</label><input id="resp" name="resp" autocomplete="name" placeholder="Ex.: Maria Souza"></div>
+      <div class="duas">
+        <div class="campo"><label for="crianca">Nome da criança <span>(opcional)</span></label><input id="crianca" name="crianca" placeholder="Ex.: Lucas"></div>
+        <div class="campo"><label for="idade">Idade da criança</label>
+          <select id="idade" name="idade">
+            <option value="">Selecione</option>
+            <option value="2 anos (Maternal 1)">2 anos</option>
+            <option value="3 anos (Maternal 2)">3 anos</option>
+            <option value="4 anos (Período 1)">4 anos</option>
+            <option value="5 anos (Período 2)">5 anos</option>
+            <option value="6 anos ou mais (Reforço)">6 anos ou mais</option>
+          </select>
+        </div>
+      </div>
+      <div class="campo"><label for="obs">Sua dúvida <span>(opcional)</span></label><textarea id="obs" name="obs" placeholder="Ex.: Ainda tem vaga para 2027?"></textarea></div>
+      <div class="previa" id="previa"><b>Prévia da mensagem</b>Preencha os campos acima.</div>
+      <p class="aviso-form" id="aviso" role="status"></p>
+      <a class="btn btn-zap" id="enviar" href="https://wa.me/5561998526089" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>
+        Enviar pelo WhatsApp
+      </a>
+    </form>
+  </div>
+</section>
+
+<!-- ================= CONTATO ================= -->
+<section class="contato" id="contato">
+  <div class="wrap">
+    <div>
+      <span class="faixa-wrap revela"><span class="faixa">Contato</span></span>
+      <h2 class="titulo-secao revela" data-atraso="1">Venha nos visitar.</h2>
+      <ul class="lista-contato">
+        <li class="revela">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div><small>Endereço</small><strong>Quadra 14, Conjunto D, Lotes 25 e 26 — Paranoá, Brasília-DF · CEP 71571-404</strong></div>
+        </li>
+        <li class="revela">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm4.5 12.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg></span>
+          <div><small>WhatsApp</small><a class="js-zap" href="https://wa.me/5561998526089" target="_blank" rel="noopener">(61) 99852-6089</a></div>
+        </li>
+        <li class="revela">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></span>
+          <div><small>Telefone</small><a href="tel:+556133696680">(61) 3369-6680</a></div>
+        </li>
+        <li class="revela">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><small>Horário</small><strong>Segunda a sexta, das 7h às 18h</strong></div>
+        </li>
+        <li class="revela">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+          <div><small>Instagram</small><a href="https://www.instagram.com/castelinhodacrianca/" target="_blank" rel="noopener">@castelinhodacrianca</a></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="como-chegar revela" data-atraso="2">
+      <!-- CONFIG.mapaInterativo = true mostra o mapa do Google aqui; false mostra o mapa ilustrado abaixo -->
+      <div class="mapa-real" id="mapa-real" hidden></div>
+      <div class="cartao-mapa" id="cartao-mapa">
+        <svg class="ruas" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect class="quadra" x="18" y="18" width="110" height="80" rx="10"/>
+          <rect class="quadra" x="160" y="18" width="90" height="80" rx="10"/>
+          <rect class="quadra" x="282" y="18" width="100" height="80" rx="10"/>
+          <rect class="quadra" x="18" y="140" width="110" height="140" rx="10"/>
+          <rect class="quadra" x="160" y="140" width="60" height="140" rx="10"/>
+          <rect class="quadra" x="282" y="140" width="100" height="62" rx="10"/>
+          <rect class="quadra" x="282" y="222" width="100" height="58" rx="10"/>
+          <path class="rua" d="M-10 119 H410"/>
+          <path class="rua" d="M144 -10 V310"/>
+          <path class="rua" d="M266 -10 V310"/>
+          <path class="rua-fina" d="M240 140 V300"/>
+          <path class="rota" d="M-10 119 H266 V132"/>
+        </svg>
+        <div class="etiqueta-local">Escola Castelinho da Criança<span>Quadra 14, Conjunto D · Paranoá</span></div>
+        <div class="pino-escola" aria-hidden="true">
+          <svg viewBox="-14 0 228 226"><use href="#brasao"/></svg>
+        </div>
+      </div>
+      <div class="acoes-mapa">
+        <a class="btn btn-amarelo" href="https://www.google.com/maps/search/?api=1&query=Escola+Castelinho+da+Crian%C3%A7a+Quadra+14+Conjunto+D+Parano%C3%A1+Bras%C3%ADlia+DF" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        <a class="btn btn-contorno" href="https://waze.com/ul?q=Quadra%2014%20Conjunto%20D%20Parano%C3%A1%20Bras%C3%ADlia&navigate=yes" target="_blank" rel="noopener">Ir com Waze</a>
+        <button class="btn btn-contorno copiar" type="button" id="copiar">Copiar endereço</button>
+        <span class="copiado" id="copiado" role="status"></span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <svg class="onda-topo" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 C 240 0, 480 50, 720 24 S 1200 0, 1440 22 V50 H0Z"/></svg>
+  <div class="wrap">
+    <div>
+      <a href="#inicio" class="marca">
+        <svg viewBox="-14 0 228 226" aria-hidden="true"><use href="#brasao"/></svg>
+        <span><b>Castelinho da Criança</b><small>Educação infantil · Paranoá-DF</small></span>
+      </a>
+      <div class="estrelas-rodape" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><use href="#estrela"/></svg><svg viewBox="0 0 24 24"><use href="#estrela"/></svg><svg viewBox="0 0 24 24"><use href="#estrela"/></svg><svg viewBox="0 0 24 24"><use href="#estrela"/></svg><svg viewBox="0 0 24 24"><use href="#estrela"/></svg>
+      </div>
+    </div>
+    <div>
+      <h4>Onde estamos</h4>
+      <p>Quadra 14, Conjunto D, Lotes 25 e 26<br>Paranoá, Brasília-DF<br>CEP 71571-404</p>
+    </div>
+    <div>
+      <h4>Fale com a gente</h4>
+      <p><a class="js-zap" href="https://wa.me/5561998526089" target="_blank" rel="noopener">WhatsApp (61) 99852-6089</a><br>
+      Telefone (61) 3369-6680<br>
+      <a href="https://www.instagram.com/castelinhodacrianca/" target="_blank" rel="noopener">@castelinhodacrianca</a></p>
+      <p style="margin-top:14px;font-size:13px;opacity:.75">Cantinho do Sucesso Educação Infantil Ltda · CNPJ 13.166.256/0001-15<br>© <span id="ano">2026</span> Escola Castelinho da Criança</p>
+    </div>
+  </div>
+</footer>
+
+<a class="zap-flutuante js-zap" href="https://wa.me/5561998526089" target="_blank" rel="noopener" aria-label="Falar com a escola pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.6-.3z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script>
+/* ============ CONFIGURAÇÃO ============ */
+const CONFIG = {
+  whatsapp: "5561998526089",
+  endereco: "Quadra 14, Conjunto D, Lotes 25 e 26 - Paranoá, Brasília-DF, CEP 71571-404",
+  // true = mostra o mapa do Google (funciona no site publicado). false = mostra o mapa ilustrado.
+  mapaInterativo: true,
+};
+
+/* ============ TURMAS ============ */
+const TURMAS = {
+  m1:{cor:"var(--amarelo-forte)",claro:true,idade:"2 anos",nome:"Maternal 1",
+    texto:"A primeira turma da escola. A criança se adapta à rotina longe de casa, faz amigos e ganha autonomia com muito acolhimento.",
+    itens:["Adaptação tranquila à rotina escolar","Estímulo à fala e à convivência em grupo","Autonomia para comer, guardar os brinquedos e ir ao banheiro"]},
+  m2:{cor:"var(--vermelho)",idade:"3 anos",nome:"Maternal 2",
+    texto:"Fase de muita descoberta. Brincadeiras dirigidas ajudam a criança a conhecer cores, formas e a se expressar melhor.",
+    itens:["Cores, formas, tamanhos e quantidades","Coordenação motora com massinha, pintura e recorte","Música, histórias e combinados da turma"]},
+  p1:{cor:"var(--azul)",idade:"4 anos",nome:"Período 1",
+    texto:"As primeiras letras e números entram na rotina, sempre de forma lúdica e respeitando o tempo de cada criança.",
+    itens:["Reconhecimento das letras e do próprio nome","Números e contagem com materiais concretos","Roda de conversa e contação de histórias"]},
+  p2:{cor:"var(--amarelo-forte)",claro:true,idade:"5 anos",nome:"Período 2",
+    texto:"A preparação para o 1º ano do ensino fundamental, com leitura e escrita iniciais e muito acompanhamento.",
+    itens:["Leitura e escrita das primeiras palavras","Raciocínio lógico e matemática básica","Retorno aos pais sobre o desenvolvimento da criança"]},
+  rf:{cor:"var(--azul-escuro)",idade:"A partir de 6 anos",nome:"Reforço Escolar",
+    texto:"Apoio para crianças do ensino fundamental, com ajuda nas tarefas da escola e nas matérias em que elas têm mais dificuldade.",
+    itens:["Acompanhamento das tarefas de casa","Reforço em leitura, escrita e matemática","Turmas pequenas, com atenção individual"]}
+};
+
+const $ = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+const estrela = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#estrela"/></svg>';
+
+/* detalhe da turma */
+const det = $("#detalhe-conteudo");
+const detBox = $(".detalhe");
+function mostraTurma(chave, animar=true){
+  const t = TURMAS[chave];
+  const html = `
+    <div class="cabeca${t.claro?" claro":""}" style="--cor:${t.cor}">
+      <p class="idade">${t.idade}</p>
+      <h3>${t.nome}</h3>
+    </div>
+    <div class="corpo">
+      <p>${t.texto}</p>
+      <ul>${t.itens.map(i=>`<li>${estrela}<span>${i}</span></li>`).join("")}</ul>
+    </div>`;
+  if(!animar){ det.innerHTML = html; return; }
+  det.classList.add("trocando");
+  setTimeout(()=>{ det.innerHTML = html; det.classList.remove("trocando"); },170);
+}
+$$(".linha-turma").forEach(b=>{
+  b.addEventListener("click",()=>{
+    $$(".linha-turma").forEach(x=>x.setAttribute("aria-selected","false"));
+    b.setAttribute("aria-selected","true");
+    mostraTurma(b.dataset.turma);
+  });
+});
+mostraTurma("m1",false);
+
+/* bandeirinhas */
+function montaBandeirinhas(){
+  const box = $("#flags");
+  const n = Math.max(8, Math.floor(box.clientWidth / 46));
+  box.innerHTML = Array.from({length:n},(_,i)=>`<span class="flag" style="animation-delay:${(i%5)*-.6}s"></span>`).join("");
+}
+montaBandeirinhas();
+let rz; addEventListener("resize",()=>{ clearTimeout(rz); rz=setTimeout(montaBandeirinhas,150); });
+
+/* entrada ao rolar (só o que começa fora da tela) */
+const io = new IntersectionObserver(ents=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.remove("pre"); io.unobserve(e.target); } });
+},{threshold:.12,rootMargin:"0px 0px -30px 0px"});
+$$(".revela").forEach(el=>{
+  if(el.getBoundingClientRect().top > innerHeight){ el.classList.add("pre"); io.observe(el); }
+});
+
+/* régua cresce ao aparecer */
+const ioRegua = new IntersectionObserver(ents=>{
+  ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("entrou"); ioRegua.disconnect(); } });
+},{threshold:.3});
+ioRegua.observe($("#regua"));
+
+/* relógios: ponteiros giram até o horário */
+function acertaRelogios(){
+  $$("#relogios li").forEach(li=>{
+    const h = Number(li.dataset.hora) % 12;
+    li.querySelector(".ponteiro.h").style.transform = `rotate(${h*30}deg)`;
+    li.querySelector(".ponteiro.m").style.transform = `rotate(360deg)`;
+  });
+}
+const relogios = $("#relogios");
+if(relogios.getBoundingClientRect().top < innerHeight){ acertaRelogios(); }
+else{
+  const ioRel = new IntersectionObserver(ents=>{
+    if(ents.some(e=>e.isIntersecting)){ setTimeout(acertaRelogios,250); ioRel.disconnect(); }
+  },{threshold:.4});
+  ioRel.observe(relogios);
+}
+
+/* topo */
+const topo = $("#topo");
+addEventListener("scroll",()=>topo.classList.toggle("rolou",scrollY>8),{passive:true});
+const links = $$(".menu a[href^='#']");
+const ioSec = new IntersectionObserver(ents=>{
+  ents.forEach(e=>{
+    if(e.isIntersecting) links.forEach(l=>l.classList.toggle("ativo",l.getAttribute("href")==="#"+e.target.id));
+  });
+},{rootMargin:"-45% 0px -50% 0px"});
+$$("main section[id]").forEach(s=>ioSec.observe(s));
+
+/* menu do celular */
+const mb = $(".menu-btn");
+mb.addEventListener("click",()=>{
+  const aberto = document.body.classList.toggle("menu-aberto");
+  mb.setAttribute("aria-expanded",aberto);
+});
+$$(".menu a").forEach(l=>l.addEventListener("click",()=>{ document.body.classList.remove("menu-aberto"); mb.setAttribute("aria-expanded","false"); }));
+
+/* links do WhatsApp com mensagem padrão */
+const urlZap = msg => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+$$(".js-zap").forEach(a=>{ a.href = urlZap("Olá! Gostaria de informações sobre a Escola Castelinho da Criança."); });
+
+/* mensagem personalizada */
+const previa = $("#previa"), aviso = $("#aviso"), enviar = $("#enviar");
+function montaMensagem(){
+  const r=$("#resp").value.trim(), c=$("#crianca").value.trim(), i=$("#idade").value, o=$("#obs").value.trim();
+  if(!r && !c && !i && !o) return "";
+  let m = `Olá! Meu nome é ${r||"___"}.`;
+  m += ` Gostaria de informações sobre a matrícula 2027 ${c?`para ${c}`:"para meu filho(a)"}${i?`, de ${i}`:""}.`;
+  m += " Quando posso ir até a escola?";
+  if(o) m += `\n\n${o}`;
+  return m;
+}
+function atualiza(){
+  const m = montaMensagem();
+  previa.innerHTML = `<b>Prévia da mensagem</b>${m ? m.replace(/&/g,"&amp;").replace(/</g,"&lt;") : "Preencha os campos acima."}`;
+  enviar.href = urlZap(m || "Olá! Gostaria de informações sobre a matrícula 2027.");
+  previa.classList.add("pulo"); clearTimeout(previa._t);
+  previa._t = setTimeout(()=>previa.classList.remove("pulo"),180);
+  aviso.textContent = "";
+  $$(".campo.erro").forEach(c=>{ if(c.querySelector("input,select").value.trim()) c.classList.remove("erro"); });
+}
+$("#ficha").addEventListener("input",atualiza);
+$("#ficha").addEventListener("submit",e=>e.preventDefault());
+enviar.addEventListener("click",e=>{
+  let ok = true;
+  ["resp","idade"].forEach(id=>{
+    const campo = $("#"+id).closest(".campo");
+    const vazio = !$("#"+id).value.trim();
+    campo.classList.toggle("erro",vazio);
+    if(vazio) ok = false;
+  });
+  if(!ok){ e.preventDefault(); aviso.textContent = "Preencha seu nome e a idade da criança para enviar."; }
+});
+atualiza();
+
+/* mapa */
+if(CONFIG.mapaInterativo){
+  const box = $("#mapa-real");
+  box.innerHTML = `<iframe title="Mapa da Escola Castelinho da Criança" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(CONFIG.endereco)}&output=embed"></iframe>`;
+  box.hidden = false; $("#cartao-mapa").hidden = true;
+}
+
+/* copiar endereço */
+$("#copiar").addEventListener("click",()=>{
+  const ok = ()=>{ $("#copiado").textContent = "Endereço copiado"; setTimeout(()=>$("#copiado").textContent="",2500); };
+  try{
+    navigator.clipboard.writeText(CONFIG.endereco).then(ok).catch(()=>{ $("#copiado").textContent = CONFIG.endereco; });
+  }catch(_){ $("#copiado").textContent = CONFIG.endereco; }
+});
+
+$("#ano").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
