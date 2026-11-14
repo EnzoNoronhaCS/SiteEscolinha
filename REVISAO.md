@@ -76,7 +76,7 @@ Nada foi publicado: o site no ar continua como estava até alguém subir estes a
 - **WhatsApp:** (61) 99971-0675 é o número do site no ar e foi mantido. Coincidência a conferir: é o mesmo número usado no site da Chácara Pôr do Sol (outro repositório). Vale garantir que não houve troca.
 - **"Desde 2011":** o pedido mandava não copiar do protótipo, mas o **site no ar já diz** "desde 2011" (texto, rodapé e `foundingDate: 2011-01-25`). Foi mantido como estava. Confirmar a data.
 - **Tour virtual:** o Street View do Google mostra só a fachada ou também o interior? Se for só a fachada, o texto "Faça um tour virtual pela nossa escolinha" promete mais do que entrega e vale trocar para "Veja a fachada no Street View".
-- **Coordenadas:** as oficiais (-15.774809, -47.776314), usadas no Waze, ficam cerca de 280 m a leste do ponto do mapa embutido do Google (-15.77483, -47.77890). Confirmar qual é a entrada certa.
+- **Localização (corrigida):** a ficha "Escola/Creche Infantil Castelinho da Criança" no Google Maps e as coordenadas antigas do site (-15.774809, -47.776314) caíam no canto oposto da quadra. O mapa da página de contato, as rotas do Google Maps, o Waze e os metadados passaram a usar -15.77450, -47.77700, tiradas da imagem de satélite comparada com o print do Ycaro (margem de uns 10 m). Fora do site, vale pedir a correção do alfinete da ficha no próprio Google Maps ("Sugerir uma edição") e conferir o Street View do bloco "Conheça Nossa Escola", que está marcado em -15.77483, -47.77890, perto da Quadra 12.
 - **Fotos:**
   - a "sala do reforço" (`sala-aula-quadro-branco`) e a "sala da direção" eram nomes do site antigo e precisam de confirmação;
   - a foto da sala de informática tem um Papai Noel (é de dezembro);
