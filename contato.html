@@ -180,6 +180,48 @@
 </div>
 </div>
 </section>
+<section class="py-16 md:py-20 bg-muted/50" id="mensagem" aria-labelledby="ficha-titulo">
+<div class="container max-w-4xl">
+<h2 id="ficha-titulo" class="section-title">Monte sua mensagem</h2>
+<p class="section-subtitle">Preencha os campos e o WhatsApp abre com a mensagem pronta. Nada é enviado antes de você tocar em enviar no WhatsApp.</p>
+<div class="ficha">
+<form class="ficha-form" data-ficha novalidate>
+<div class="ficha-campo">
+<label for="ficha-nome">Seu nome <span class="ficha-obrigatorio">(obrigatório)</span></label>
+<input id="ficha-nome" name="nome" type="text" autocomplete="name" required aria-describedby="ficha-nome-erro"/>
+<p id="ficha-nome-erro" class="ficha-erro" hidden>Escreva o seu nome.</p>
+</div>
+<div class="ficha-campo">
+<label for="ficha-crianca">Nome da criança <span class="ficha-opcional">(opcional)</span></label>
+<input id="ficha-crianca" name="crianca" type="text" autocomplete="off"/>
+</div>
+<div class="ficha-campo">
+<label for="ficha-turma">Turma de interesse <span class="ficha-obrigatorio">(obrigatório)</span></label>
+<select id="ficha-turma" name="turma" required aria-describedby="ficha-turma-erro">
+<option value="">Escolha a turma</option>
+<option>Maternal I (2 anos)</option>
+<option>Maternal II (3 anos)</option>
+<option>Jardim I (4 anos)</option>
+<option>Jardim II (5 anos)</option>
+<option>Reforço Escolar (1º ao 5º ano)</option>
+<option>Contraturno (4 a 10 anos)</option>
+</select>
+<p id="ficha-turma-erro" class="ficha-erro" hidden>Escolha a turma.</p>
+</div>
+<div class="ficha-campo">
+<label for="ficha-duvida">Sua dúvida <span class="ficha-opcional">(opcional)</span></label>
+<textarea id="ficha-duvida" name="duvida" rows="3"></textarea>
+</div>
+<button type="submit" class="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold px-6 py-3.5 rounded-full text-sm hover:opacity-90 transition-opacity">Abrir no WhatsApp</button>
+<noscript><p class="ficha-noscript">Para montar a mensagem é preciso JavaScript. Você pode falar direto pelo <a href="https://wa.me/5561999710675?text=Olá!%20Vim%20pelo%20site%20e%20tenho%20uma%20dúvida.">WhatsApp (61) 99971-0675</a>.</p></noscript>
+</form>
+<div class="ficha-previa" aria-labelledby="ficha-previa-titulo">
+<p id="ficha-previa-titulo" class="ficha-previa-titulo">Prévia da mensagem</p>
+<p class="ficha-previa-texto" data-ficha-previa></p>
+</div>
+</div>
+</div>
+</section>
 </main>
 <footer class="bg-foreground text-primary-foreground">
 <div class="container py-12">

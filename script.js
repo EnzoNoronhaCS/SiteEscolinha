@@ -110,3 +110,41 @@ document.querySelectorAll('[data-copiar]').forEach(botao => {
   } else avisar(copiarAntigo());
  });
 });
+// "Monte sua mensagem" (página de contato): monta o texto, mostra a prévia e abre o WhatsApp.
+const ficha = document.querySelector('[data-ficha]');
+if(ficha) {
+ const WHATSAPP = '5561999710675';
+ const previa = document.querySelector('[data-ficha-previa]');
+ const campo = nome => ficha.elements[nome];
+ function montarMensagem() {
+  const nome = campo('nome').value.trim();
+  const crianca = campo('crianca').value.trim();
+  const turma = campo('turma').value;
+  const duvida = campo('duvida').value.trim();
+  let texto = 'Olá! Vim pelo site da Escola Castelinho da Criança.';
+  texto += nome ? ' Meu nome é ' + nome + '.' : ' Meu nome é [seu nome].';
+  if(crianca) texto += ' Sou responsável por ' + crianca + '.';
+  texto += turma ? ' Tenho interesse na turma ' + turma + '.' : ' Tenho interesse na turma [escolha a turma].';
+  if(duvida) texto += '\n\nMinha dúvida: ' + duvida;
+  return texto;
+ }
+ function atualizarPrevia() { previa.textContent = montarMensagem(); }
+ function marcarErro(nome, comErro) {
+  const el = campo(nome);
+  el.setAttribute('aria-invalid', String(comErro));
+  document.getElementById('ficha-' + nome + '-erro').hidden = !comErro;
+ }
+ ficha.addEventListener('input', event => {
+  if(event.target.getAttribute('aria-invalid') === 'true' && event.target.value.trim()) marcarErro(event.target.name, false);
+  atualizarPrevia();
+ });
+ ficha.addEventListener('submit', event => {
+  event.preventDefault();
+  const semNome = !campo('nome').value.trim();
+  const semTurma = !campo('turma').value;
+  marcarErro('nome', semNome); marcarErro('turma', semTurma);
+  if(semNome || semTurma) { (semNome ? campo('nome') : campo('turma')).focus(); return; }
+  window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(montarMensagem()), '_blank', 'noopener');
+ });
+ atualizarPrevia();
+}

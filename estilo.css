@@ -3392,3 +3392,20 @@ video {
 .rota-botoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .copiar-aviso{min-height:1.5em;margin-top:10px;font-size:14px;font-weight:700;color:hsl(var(--primary))}
 .copiar-aviso.is-erro{color:hsl(var(--foreground))}
+.ficha{display:grid;gap:24px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:1.5rem;padding:24px;box-shadow:0 4px 6px -1px rgb(0 0 0 / .1),0 2px 4px -2px rgb(0 0 0 / .1)}
+@media(min-width:768px){.ficha{grid-template-columns:1.1fr .9fr;padding:32px}}
+.ficha-form{display:grid;gap:16px;align-content:start}
+.ficha-campo{display:grid;gap:6px}
+.ficha-campo label{font-family:'Quicksand',sans-serif;font-weight:700;color:hsl(var(--foreground))}
+.ficha-obrigatorio,.ficha-opcional{font-family:'Nunito',sans-serif;font-weight:400;font-size:13px;color:hsl(var(--muted-foreground))}
+.ficha-campo input,.ficha-campo select,.ficha-campo textarea{width:100%;border:2px solid hsl(var(--border));border-radius:12px;padding:10px 14px;font:inherit;font-size:16px;background:hsl(var(--background));color:hsl(var(--foreground))}
+.ficha-campo textarea{resize:vertical}
+.ficha-campo input:focus,.ficha-campo select:focus,.ficha-campo textarea:focus{border-color:hsl(var(--primary));outline:none}
+.ficha-campo [aria-invalid=true]{border-color:hsl(var(--accent))}
+.ficha-erro{font-size:14px;font-weight:700;color:hsl(var(--accent))}
+.ficha-form button{justify-self:start}
+.ficha-previa{background:hsl(var(--green-light));border-radius:1rem;padding:20px;align-self:start}
+.ficha-previa-titulo{font-family:'Quicksand',sans-serif;font-weight:700;margin-bottom:8px;color:hsl(var(--foreground))}
+.ficha-previa-texto{white-space:pre-wrap;color:hsl(var(--foreground));font-size:15px;line-height:1.6}
+.ficha-noscript{font-size:14px}
+section[id],main[id]{scroll-margin-top:96px}
