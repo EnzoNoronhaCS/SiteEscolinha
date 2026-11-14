@@ -1,3 +1,5 @@
+> **ATENÇÃO: documento do protótipo, com dados ERRADOS** (WhatsApp, nomes de turmas, horários, Instagram e a ideia de "sem creche"). Não use como fonte de informação. Os dados corretos estão no `CLAUDE.md` da raiz.
+
 # Site da Escola Castelinho da Criança — passagem para o Claude Code
 
 Site **informativo**, de uma página, da Escola Castelinho da Criança (Paranoá-DF). A matrícula é feita **presencialmente** na secretaria. O site existe para apresentar a escola e levar os pais ao WhatsApp e ao endereço.
