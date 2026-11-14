@@ -3371,7 +3371,7 @@ video {
 .offline-header [aria-current=page]{color:hsl(var(--primary))}
 .offline-header.is-home:not(.is-solid) nav>a[aria-current=page]{color:white}
 .offline-dropdown-panel{display:none;color:hsl(var(--foreground))}
-.offline-dropdown:hover .offline-dropdown-panel,.offline-dropdown:focus-within .offline-dropdown-panel,.offline-dropdown.is-open .offline-dropdown-panel{display:block}
+.offline-dropdown.is-open .offline-dropdown-panel,html:not(.js) .offline-dropdown:hover .offline-dropdown-panel,html:not(.js) .offline-dropdown:focus-within .offline-dropdown-panel{display:block}
 .offline-mobile[hidden]{display:none}
 .offline-mobile a[aria-current=page]{background:hsl(var(--green-light));color:hsl(var(--primary))}
 .offline-map{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:hsl(var(--green-light));color:hsl(var(--foreground));text-align:center}
@@ -3386,3 +3386,5 @@ video {
    Estilos adicionados na revisão do site. O resto do arquivo é o Tailwind compilado do site original. */
 .rodape-link{text-decoration:underline;text-underline-offset:3px;font-weight:700}
 .rodape-link:hover{opacity:1}
+[data-dropdown] svg{transition:transform .2s ease}
+.offline-dropdown.is-open [data-dropdown] svg{transform:rotate(180deg)}
