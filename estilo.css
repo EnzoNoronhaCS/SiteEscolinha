@@ -509,7 +509,7 @@ video {
     --secondary-foreground: 0 0% 100%;
 
     --muted: 120 15% 95%;
-    --muted-foreground: 150 10% 45%;
+    --muted-foreground: 150 10% 40%; /* era 45%: subiu o contraste de 4,2 para 5,1 (WCAG AA) */
 
     --accent: 0 77% 41%;
     --accent-foreground: 0 0% 100%;
@@ -3413,3 +3413,9 @@ section[id],main[id]{scroll-margin-top:96px}
 .btn-whatsapp-float{background-color:#15803D;gap:8px;text-decoration:none}
 .flutuante-texto{display:none;color:#fff;font-weight:700;font-size:15px}
 @media(min-width:768px){.btn-whatsapp-float{width:auto;padding:0 22px 0 16px}.flutuante-texto{display:inline}}
+/* Acessibilidade: foco visível em fundo claro e escuro, e link para pular o menu. */
+:focus-visible{outline:3px solid hsl(var(--secondary));outline-offset:2px;box-shadow:0 0 0 2px hsl(var(--foreground))}
+.ficha-campo input:focus-visible,.ficha-campo select:focus-visible,.ficha-campo textarea:focus-visible{outline:3px solid hsl(var(--secondary));outline-offset:1px}
+.pular-conteudo{position:absolute;left:12px;top:-100px;z-index:100;background:hsl(var(--foreground));color:#fff;padding:10px 16px;border-radius:999px;font-weight:700}
+.pular-conteudo:focus{top:12px}
+main:focus{outline:none}
