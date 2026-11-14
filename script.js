@@ -88,3 +88,25 @@ document.querySelectorAll('[data-map-src]').forEach(button=>{
 });
 // Ano do rodapé sempre atualizado (o HTML traz 2026 como reserva, caso o JS não rode).
 document.querySelectorAll('[data-ano]').forEach(el => { el.textContent = new Date().getFullYear(); });
+// "Copiar endereço": usa a área de transferência; se o navegador bloquear, tenta o método antigo
+// e, se nada funcionar, mostra o endereço selecionado para a pessoa copiar na mão.
+document.querySelectorAll('[data-copiar]').forEach(botao => {
+ const aviso = document.querySelector('[data-copiar-aviso]');
+ const texto = botao.dataset.copiar;
+ function copiarAntigo() {
+  const campo = document.createElement('textarea');
+  campo.value = texto; campo.setAttribute('readonly', ''); campo.style.position = 'fixed'; campo.style.opacity = '0';
+  document.body.appendChild(campo); campo.select();
+  let ok = false; try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+  campo.remove(); return ok;
+ }
+ function avisar(ok) {
+  aviso.classList.toggle('is-erro', !ok);
+  aviso.textContent = ok ? 'Endereço copiado.' : 'Não foi possível copiar. O endereço é: ' + texto;
+ }
+ botao.addEventListener('click', () => {
+  if(navigator.clipboard && window.isSecureContext) {
+   navigator.clipboard.writeText(texto).then(() => avisar(true), () => avisar(copiarAntigo()));
+  } else avisar(copiarAntigo());
+ });
+});

@@ -3388,3 +3388,7 @@ video {
 .rodape-link:hover{opacity:1}
 [data-dropdown] svg{transition:transform .2s ease}
 .offline-dropdown.is-open [data-dropdown] svg{transform:rotate(180deg)}
+.mapa-contato iframe{display:block;width:100%;height:400px;border:0;background:hsl(var(--green-light))}
+.rota-botoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.copiar-aviso{min-height:1.5em;margin-top:10px;font-size:14px;font-weight:700;color:hsl(var(--primary))}
+.copiar-aviso.is-erro{color:hsl(var(--foreground))}
