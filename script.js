@@ -86,3 +86,5 @@ document.querySelectorAll('[data-map-src]').forEach(button=>{
   carregarMapa(button);
  });
 });
+// Ano do rodapé sempre atualizado (o HTML traz 2026 como reserva, caso o JS não rode).
+document.querySelectorAll('[data-ano]').forEach(el => { el.textContent = new Date().getFullYear(); });
