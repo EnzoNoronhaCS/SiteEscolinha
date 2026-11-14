@@ -3409,3 +3409,7 @@ video {
 .ficha-previa-texto{white-space:pre-wrap;color:hsl(var(--foreground));font-size:15px;line-height:1.6}
 .ficha-noscript{font-size:14px}
 section[id],main[id]{scroll-margin-top:96px}
+/* Botão flutuante: verde mais escuro para o ícone e o texto brancos terem contraste (5:1); texto só a partir de 768 px. */
+.btn-whatsapp-float{background-color:#15803D;gap:8px;text-decoration:none}
+.flutuante-texto{display:none;color:#fff;font-weight:700;font-size:15px}
+@media(min-width:768px){.btn-whatsapp-float{width:auto;padding:0 22px 0 16px}.flutuante-texto{display:inline}}
